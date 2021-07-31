@@ -1,17 +1,14 @@
-﻿using CitizenFX.Core;
-using CitizenFX.Core.Native;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Dynamic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using CitizenFX.Core;
+using CitizenFX.Core.Native;
 
 namespace vorpinputs_cl
 {
     public class vorpinputs_cl : BaseScript
     {
-        static string text = null;
+        private static string text;
 
         public vorpinputs_cl()
         {
@@ -44,7 +41,8 @@ namespace vorpinputs_cl
         public async Task WaitToInputs(string button, string placeholder, dynamic cb)
         {
             API.SetNuiFocus(true, true);
-            string json = "{\"type\": \"enableinput\",\"style\": \"block\",\"button\": \"" + button + "\",\"placeholder\": \"" + placeholder + "\"}";
+            var json = "{\"type\": \"enableinput\",\"style\": \"block\",\"button\": \"" + button +
+                       "\",\"placeholder\": \"" + placeholder + "\"}";
             API.SendNuiMessage(json);
 
             while (text == null)
@@ -63,10 +61,9 @@ namespace vorpinputs_cl
         {
             API.SetNuiFocus(false, false);
 
-            string json = "{\"type\": \"enableinput\",\"style\": \"none\"}";
+            var json = "{\"type\": \"enableinput\",\"style\": \"none\"}";
 
             API.SendNuiMessage(json);
         }
-
     }
 }
